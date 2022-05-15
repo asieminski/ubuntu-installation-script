@@ -55,7 +55,6 @@ pip3 install jedi flake8 isort pynvim black radian
 # Change bashrc setup
 echo "alias r=\"radian\"" >> ~/.bashrc
 echo "neofetch" >> ~/.bashrc
-source ~/.bashrc
 
 # stow configs
 #cd dotfiles
