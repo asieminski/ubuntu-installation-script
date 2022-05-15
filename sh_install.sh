@@ -2,15 +2,17 @@
 # License: GNU GPLv3
 apt update
 apt upgrade -y
-
+# Overcomes "dpkg was interrupted, you must manually run 'sudo dpkg --configure -a' to correct the problem" error
+sudo dpkg --configure -a
 # make a home for init.vim
 mkdir -p dotfiles/nvim/.config/nvim/
 wget -O dotfiles/nvim/.config/nvim/init.vim https://raw.githubusercontent.com/asieminski/ubuntu-installation-script/main/init.vim
 
+# Install base R (https://cloud.r-project.org/bin/linux/ubuntu/)
 # update indices
 apt update -qq
 # install two helper packages we need
-apt install software-properties-common dirmngr
+apt install -y software-properties-common dirmngr 
 # add the signing key (by Michael Rutter) for these repos
 # To verify key, run gpg --show-keys /etc/apt/trusted.gpg.d/cran_ubuntu_key.asc 
 # Fingerprint: E298A3A825C0D65DFD57CBB651716619E084DAB9
@@ -20,10 +22,11 @@ add-apt-repository "deb https://cloud.r-project.org/bin/linux/ubuntu $(lsb_relea
 apt update
 # Install R
 apt install r-base r-base-dev -y
-# Add CRAN access to R
-echo "deb https://ppa.launchpadcontent.net/c2d4u.team/c2d4u4.0+/ubuntu/ focal main" > /etc/apt/sources.list.d/c2d4u_team-ubuntu-c2d4u4_0_-jammy.list
-apt update
-# Install R dependencies
+# Removed these from install because they broke things 
+# echo "deb https://ppa.launchpadcontent.net/c2d4u.team/c2d4u4.0+/ubuntu/ focal main" > /etc/apt/sources.list.d/c2d4u_team-ubuntu-c2d4u4_0_-jammy.list
+# apt update
+
+# Install R dependencies (https://blog.zenggyu.com/en/post/2018-01-29/installing-r-r-packages-e-g-tidyverse-and-rstudio-on-ubuntu-linux/)
 # required by tidyverse
 apt install -y libcurl4-openssl-dev libssl-dev libxml2-dev
 # required by r-base-core
@@ -36,24 +39,28 @@ apt install -y xorg-dev
 apt install -y texlive-base texlive-latex-base texlive-plain-generic texlive-fonts-recommended texlive-fonts-extra texlive-extra-utils texlive-latex-recommended texlive-latex-extra texinfo
 
 
-apt install curl neovim make r-cran-stan r-cran-tidyverse r-cran-languageserver python3-pip neofetch tree build-essential git stow ranger -y
-
+apt install curl neovim make r-cran-tidyverse python3-pip neofetch tree build-essential git stow ranger -y
+# I can install cmdstanr instead and languageserver isn't needed if I do :CocInstall coc-r-lsp:
+#R -e "install.packages(c('rstan', 'languageserver'))"
 
 # vimplug
 sh -c 'curl -fLo "${XDG_DATA_HOME:-$HOME/.local/share}"/nvim/site/autoload/plug.vim --create-dirs \
        https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
 # Install nodejs for coc autocompletion plugin
-curl -sL install-node.vercel.app/lts | bash
+curl -sL install-node.vercel.app/lts | bash -s -- -y
 
 # jedi is an autocomplete library. Very nice for vim.
 pip3 install jedi flake8 isort pynvim black radian
 
 # Change bashrc setup
-echo "alias r=\"radian\"\nneofetch" >> ~/.bashrc
+echo "alias r=\"radian\"" >> ~/.bashrc
+echo "neofetch" >> ~/.bashrc
+source ~/.bashrc
+
 # stow configs
-cd dotfiles
-stow nvim
-cd ..
+#cd dotfiles
+#stow nvim
+#cd ..
 
 # nvim into dotfiles/nvim/.config/nvim and run 
 # :PlugInstall
