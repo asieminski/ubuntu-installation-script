@@ -4,9 +4,15 @@ apt update
 apt upgrade -y
 # Overcomes "dpkg was interrupted, you must manually run 'sudo dpkg --configure -a' to correct the problem" error
 sudo dpkg --configure -a
-# make a home for init.vim
-mkdir -p dotfiles/nvim/.config/nvim/
-wget -O dotfiles/nvim/.config/nvim/init.vim https://raw.githubusercontent.com/asieminski/ubuntu-installation-script/main/init.vim
+
+
+# Download and install miniconda
+wget https://repo.anaconda.com/miniconda/Miniconda3-py39_4.11.0-Linux-x86_64.sh -O ~/miniconda.sh
+bash ~/miniconda.sh -b -p $HOME/miniconda
+rm miniconda.sh
+~/miniconda/bin/conda init
+~/miniconda/bin/conda config --add channels conda-forge
+
 
 # Install base R (https://cloud.r-project.org/bin/linux/ubuntu/)
 # update indices
@@ -39,10 +45,14 @@ apt install -y xorg-dev
 apt install -y texlive-base texlive-latex-base texlive-plain-generic texlive-fonts-recommended texlive-fonts-extra texlive-extra-utils texlive-latex-recommended texlive-latex-extra texinfo
 
 
-apt install curl neovim make r-cran-tidyverse python3-pip neofetch tree build-essential git stow ranger -y
+apt install curl neovim make r-cran-tidyverse neofetch tree build-essential git ranger -y
 # I can install cmdstanr instead and languageserver isn't needed if I do :CocInstall coc-r-lsp:
 #R -e "install.packages(c('rstan', 'languageserver'))"
 
+# Neovim setup
+# make a home for init.vim
+mkdir -p dotfiles/nvim/.config/nvim/
+wget -O dotfiles/nvim/.config/nvim/init.vim https://raw.githubusercontent.com/asieminski/ubuntu-installation-script/main/init.vim
 # vimplug
 sh -c 'curl -fLo "${XDG_DATA_HOME:-$HOME/.local/share}"/nvim/site/autoload/plug.vim --create-dirs \
        https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
@@ -50,16 +60,11 @@ sh -c 'curl -fLo "${XDG_DATA_HOME:-$HOME/.local/share}"/nvim/site/autoload/plug.
 curl -sL install-node.vercel.app/lts | bash -s -- -y
 
 # jedi is an autocomplete library. Very nice for vim.
-pip3 install jedi flake8 isort pynvim black radian
+~/miniconda/bin/conda install jedi pynvim radian
 
 # Change bashrc setup
 echo "alias r=\"radian\"" >> ~/.bashrc
 echo "neofetch" >> ~/.bashrc
-
-# stow configs
-#cd dotfiles
-#stow nvim
-#cd ..
 
 # nvim into dotfiles/nvim/.config/nvim and run 
 # :PlugInstall
