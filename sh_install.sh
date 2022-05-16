@@ -60,8 +60,9 @@ curl -fLo ~/.local/share/nvim/site/autoload/plug.vim --create-dirs \
 # Install nodejs for coc autocompletion plugin
 curl -sL install-node.vercel.app/lts | bash -s -- -y
 
-# jedi is an autocomplete library. Very nice for vim.
+# neovim utilities install
 ~/miniconda/bin/conda install -y jedi pynvim radian
+R -e "install.packages('languageserver')"
 
 # Change bashrc setup
 echo "alias r=\"radian\"" >> ~/.bashrc
