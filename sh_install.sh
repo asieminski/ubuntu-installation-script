@@ -51,8 +51,9 @@ apt install -y curl neovim make r-cran-tidyverse neofetch tree build-essential g
 
 # Neovim setup
 # make a home for init.vim
-mkdir -p ~/.config/nvim/
-wget -O ~/.config/nvim/init.vim https://raw.githubusercontent.com/asieminski/ubuntu-installation-script/main/init.vim
+cd ~
+mkdir -p .config/nvim/
+wget -O .config/nvim/init.vim https://raw.githubusercontent.com/asieminski/ubuntu-installation-script/main/init.vim
 # vim-plug
 curl -fLo ~/.local/share/nvim/site/autoload/plug.vim --create-dirs \
     https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
