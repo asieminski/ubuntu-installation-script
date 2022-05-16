@@ -4,14 +4,14 @@ apt update
 apt upgrade -y
 # Overcomes "dpkg was interrupted, you must manually run 'sudo dpkg --configure -a' to correct the problem" error
 sudo dpkg --configure -a
-
+cd $HOME
 
 # Download and install miniconda
-wget https://repo.anaconda.com/miniconda/Miniconda3-py39_4.11.0-Linux-x86_64.sh -O ~/miniconda.sh
-bash ~/miniconda.sh -b -p $HOME/miniconda
+wget https://repo.anaconda.com/miniconda/Miniconda3-py39_4.11.0-Linux-x86_64.sh -O miniconda.sh
+bash miniconda.sh -b -p miniconda
 rm miniconda.sh
-~/miniconda/bin/conda init
-~/miniconda/bin/conda config --add channels conda-forge
+miniconda/bin/conda init
+miniconda/bin/conda config --add channels conda-forge
 
 
 # Install base R (https://cloud.r-project.org/bin/linux/ubuntu/)
@@ -51,17 +51,16 @@ apt install -y curl neovim make r-cran-tidyverse neofetch tree build-essential g
 
 # Neovim setup
 # make a home for init.vim
-cd ~
 mkdir -p .config/nvim/
 wget -O .config/nvim/init.vim https://raw.githubusercontent.com/asieminski/ubuntu-installation-script/main/init.vim
 # vim-plug
-curl -fLo ~/.local/share/nvim/site/autoload/plug.vim --create-dirs \
+curl -fLo .local/share/nvim/site/autoload/plug.vim --create-dirs \
     https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
 # Install nodejs for coc autocompletion plugin
 curl -sL install-node.vercel.app/lts | bash -s -- -y
 
 # neovim utilities install
-~/miniconda/bin/conda install -y jedi pynvim radian
+miniconda/bin/conda install -y jedi pynvim radian
 R -e "install.packages('languageserver')"
 
 # Change bashrc setup
