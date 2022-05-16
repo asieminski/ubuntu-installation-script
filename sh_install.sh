@@ -45,7 +45,7 @@ apt install -y xorg-dev
 apt install -y texlive-base texlive-latex-base texlive-plain-generic texlive-fonts-recommended texlive-fonts-extra texlive-extra-utils texlive-latex-recommended texlive-latex-extra texinfo
 
 
-apt install curl neovim make r-cran-tidyverse neofetch tree build-essential git ranger -y
+apt install -y curl neovim make r-cran-tidyverse neofetch tree build-essential git ranger flatpak
 # I can install cmdstanr instead and languageserver isn't needed if I do :CocInstall coc-r-lsp:
 #R -e "install.packages(c('rstan', 'languageserver'))"
 
@@ -53,9 +53,9 @@ apt install curl neovim make r-cran-tidyverse neofetch tree build-essential git 
 # make a home for init.vim
 mkdir -p ~/.config/nvim/
 wget -O ~/.config/nvim/init.vim https://raw.githubusercontent.com/asieminski/ubuntu-installation-script/main/init.vim
-# vimplug
-sh -c 'curl -fLo "${XDG_DATA_HOME:-$HOME/.local/share}"/nvim/site/autoload/plug.vim --create-dirs \
-       https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
+# vim-plug
+curl -fLo ~/.local/share/nvim/site/autoload/plug.vim --create-dirs \
+    https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
 # Install nodejs for coc autocompletion plugin
 curl -sL install-node.vercel.app/lts | bash -s -- -y
 
