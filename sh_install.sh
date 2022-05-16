@@ -1,10 +1,12 @@
-#!/bin/sh
+#!/usr/bin/bash
 # License: GNU GPLv3
+# Designed for Pop_OS! 22.04
+# Run from your home directory (cd ~) and as root (sudo bash sh_install.sh)
 apt update
 apt upgrade -y
 # Overcomes "dpkg was interrupted, you must manually run 'sudo dpkg --configure -a' to correct the problem" error
 sudo dpkg --configure -a
-cd $HOME
+
 
 # Download and install miniconda
 wget https://repo.anaconda.com/miniconda/Miniconda3-py39_4.11.0-Linux-x86_64.sh -O miniconda.sh
@@ -64,8 +66,8 @@ miniconda/bin/conda install -y jedi pynvim radian
 R -e "install.packages('languageserver')"
 
 # Change bashrc setup
-echo "alias r=\"radian\"" >> ~/.bashrc
-echo "neofetch" >> ~/.bashrc
+echo "alias r=\"radian\"" >> .bashrc
+echo "neofetch" >> .bashrc
 
 # nvim into dotfiles/nvim/.config/nvim and run 
 # :PlugInstall
