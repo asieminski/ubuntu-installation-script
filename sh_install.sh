@@ -51,8 +51,8 @@ apt install curl neovim make r-cran-tidyverse neofetch tree build-essential git 
 
 # Neovim setup
 # make a home for init.vim
-mkdir -p dotfiles/nvim/.config/nvim/
-wget -O dotfiles/nvim/.config/nvim/init.vim https://raw.githubusercontent.com/asieminski/ubuntu-installation-script/main/init.vim
+mkdir -p ~/.config/nvim/
+wget -O ~/.config/nvim/init.vim https://raw.githubusercontent.com/asieminski/ubuntu-installation-script/main/init.vim
 # vimplug
 sh -c 'curl -fLo "${XDG_DATA_HOME:-$HOME/.local/share}"/nvim/site/autoload/plug.vim --create-dirs \
        https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
@@ -60,7 +60,7 @@ sh -c 'curl -fLo "${XDG_DATA_HOME:-$HOME/.local/share}"/nvim/site/autoload/plug.
 curl -sL install-node.vercel.app/lts | bash -s -- -y
 
 # jedi is an autocomplete library. Very nice for vim.
-~/miniconda/bin/conda install jedi pynvim radian
+~/miniconda/bin/conda install -y jedi pynvim radian
 
 # Change bashrc setup
 echo "alias r=\"radian\"" >> ~/.bashrc
