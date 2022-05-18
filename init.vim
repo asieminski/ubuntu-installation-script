@@ -13,7 +13,7 @@ Plug 'roxma/nvim-yarp'
 Plug 'preservim/nerdtree'
 Plug 'Raimondi/delimitMate'
 Plug 'itchyny/lightline.vim'
-Plug 'neoclide/coc.nvim'
+Plug 'neoclide/coc.nvim', {'branch': 'master', 'do': 'yarn install --frozen-lockfile'}
 
 " Initialize plugin system
 call plug#end()
