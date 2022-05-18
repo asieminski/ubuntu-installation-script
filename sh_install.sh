@@ -71,6 +71,11 @@ sudo R -e "install.packages('languageserver')"
 echo "alias r=\"radian\"" >> .bashrc
 echo "neofetch" >> .bashrc
 
+# Fix bluetooth kernel driver bug https://github.com/pop-os/pop/issues/1153
+# From http://mirrors.edge.kernel.org/ubuntu/pool/main/l/linux-firmware/
+wget http://mirrors.edge.kernel.org/ubuntu/pool/main/l/linux-firmware/linux-firmware_1.201.5_all.deb
+sudo dpkg -i --force-overwrite linux-firmware_1.201.5_all.deb
+
 # nvim into dotfiles/nvim/.config/nvim and run 
 # :PlugInstall
 # Install coc (autcompletion extensions https://github.com/neoclide/coc.nvim/wiki/Using-coc-extensions)
