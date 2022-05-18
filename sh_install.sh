@@ -54,8 +54,8 @@ sudo apt install -y curl neovim make r-cran-tidyverse neofetch tree build-essent
 mkdir -p .config/nvim/
 wget -O .config/nvim/init.vim https://raw.githubusercontent.com/asieminski/ubuntu-installation-script/main/init.vim
 # vim-plug
-curl -fLo ~/.var/app/io.neovim.nvim/data/nvim/site/autoload/plug.vim --create-dirs \
-    https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+sh -c 'curl -fLo "${XDG_DATA_HOME:-$HOME/.local/share}"/nvim/site/autoload/plug.vim --create-dirs \
+       https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
 # Install nodejs for coc autocompletion plugin
 curl -sL install-node.vercel.app/lts | bash -s -- -y
 
