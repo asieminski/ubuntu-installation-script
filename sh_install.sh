@@ -47,7 +47,7 @@ sudo apt install -y xorg-dev
 sudo apt install -y texlive-base texlive-latex-base texlive-plain-generic texlive-fonts-recommended texlive-fonts-extra texlive-extra-utils texlive-latex-recommended texlive-latex-extra texinfo
 
 # Install essential packages
-sudo apt install -y curl neovim make r-cran-tidyverse neofetch tree build-essential git ranger flatpak
+sudo apt install -y curl neovim make r-cran-tidyverse neofetch tree build-essential git ranger flatpak cmdtest
 # Add ranger .config files
 ranger --copy-config=all
 
