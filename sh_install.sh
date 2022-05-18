@@ -48,6 +48,8 @@ sudo apt install -y texlive-base texlive-latex-base texlive-plain-generic texliv
 
 # Install essential packages
 sudo apt install -y curl neovim make r-cran-tidyverse neofetch tree build-essential git ranger flatpak
+# Add ranger .config files
+ranger --copy-config=all
 
 # Neovim setup
 # make a home for init.vim
