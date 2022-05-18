@@ -46,10 +46,8 @@ sudo apt install -y xorg-dev
 # required by r-base-dev to build PDF help pages (optional; note that these dependencies are quite heavy, and since html help pages are already included, PDF ones are usually unnecessary)
 sudo apt install -y texlive-base texlive-latex-base texlive-plain-generic texlive-fonts-recommended texlive-fonts-extra texlive-extra-utils texlive-latex-recommended texlive-latex-extra texinfo
 
-
+# Install essential packages
 sudo apt install -y curl neovim make r-cran-tidyverse neofetch tree build-essential git ranger flatpak
-# I can install cmdstanr instead and languageserver isn't needed if I do :CocInstall coc-r-lsp:
-#R -e "install.packages(c('rstan', 'languageserver'))"
 
 # Neovim setup
 # make a home for init.vim
@@ -63,7 +61,7 @@ curl -sL install-node.vercel.app/lts | bash -s -- -y
 
 # neovim utilities install
 miniconda/bin/conda install -y jedi pynvim radian
-R -e "install.packages('languageserver')"
+sudo R -e "install.packages('languageserver')"
 
 # Change bashrc setup
 echo "alias r=\"radian\"" >> .bashrc
