@@ -66,6 +66,8 @@ curl -sL install-node.vercel.app/lts | bash -s -- -y
 # neovim utilities install
 pip3 jedi pynvim radian
 sudo R -e "install.packages('languageserver')"
+# Install cmdstan
+miniconda/bin/conda install -c conda-forge cmdstan
 
 # Change bashrc setup
 echo "alias r=\"radian\"" >> .bashrc
