@@ -70,7 +70,7 @@ sudo R -e "install.packages('languageserver')"
 # Change bashrc setup
 echo "alias r=\"radian\"" >> .bashrc
 echo "neofetch" >> .bashrc
-
+echo "PATH=~/.local/bin/:$PATH" >> .bashrc
 # Fix bluetooth kernel driver bug https://github.com/pop-os/pop/issues/1153
 # From http://mirrors.edge.kernel.org/ubuntu/pool/main/l/linux-firmware/
 wget http://mirrors.edge.kernel.org/ubuntu/pool/main/l/linux-firmware/linux-firmware_1.201.5_all.deb
