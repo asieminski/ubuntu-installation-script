@@ -64,7 +64,7 @@ sh -c 'curl -fLo "${XDG_DATA_HOME:-$HOME/.local/share}"/nvim/site/autoload/plug.
 curl -sL install-node.vercel.app/lts | bash -s -- -y
 
 # neovim utilities install
-sudo miniconda/bin/conda install -y jedi pynvim radian
+sudo miniconda/bin/conda install -yc conda-forge jedi pynvim radian
 sudo R -e "install.packages('languageserver')"
 
 # Change bashrc setup
