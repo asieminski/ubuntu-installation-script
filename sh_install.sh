@@ -73,10 +73,11 @@ sudo miniconda/bin/conda install -c conda-forge cmdstan -y
 echo "alias r=\"radian\"" >> .bashrc
 echo "neofetch" >> .bashrc
 echo "PATH=~/.local/bin/:$PATH" >> .bashrc
-# Fix bluetooth kernel driver bug https://github.com/pop-os/pop/issues/1153
+# Fix bluetooth kernel driver bug https://askubuntu.com/questions/1403817/i-cant-turn-on-bluetooth-in-ubuntu-22-04-lts
 # From http://mirrors.edge.kernel.org/ubuntu/pool/main/l/linux-firmware/
-wget http://mirrors.edge.kernel.org/ubuntu/pool/main/l/linux-firmware/linux-firmware_1.201.5_all.deb
-sudo dpkg -i --force-overwrite linux-firmware_1.201.5_all.deb
+wget http://archive.ubuntu.com/ubuntu/pool/main/l/linux-firmware/linux-firmware_1.201.tar.xz
+tar -xf linux-firmware_1.201.tar.xz
+sudo cp -R linux-firmware/ar3k /lib/firmware
 
 # nvim into dotfiles/nvim/.config/nvim and run 
 # :PlugInstall
