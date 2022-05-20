@@ -1,10 +1,12 @@
 #!/usr/bin/bash
+# A script for intalling basic R and Python tools for data science on a new install of Pop_OS! 22.04. These tools include: 
+# the newest R version, radian console, Anaconda, neovim with plugins for interactive coding, CLI utilities
 # License: GNU GPLv3
 # Designed for Pop_OS! 22.04
-# Run from your home directory (cd ~) and as root (sudo bash sh_install.sh)
+# Run from your home directory (cd ~) as root (sudo bash sh_install.sh)
 sudo apt update
 sudo apt upgrade -y
-# Overcomes "dpkg was interrupted, you must manually run 'sudo dpkg --configure -a' to correct the problem" error
+# Overcomes "dpkg was interrupted, you must manually run 'sudo dpkg --configure -a' to correct the problem" error in Ubuntu 22.04
 # sudo dpkg --configure -a
 
 
@@ -54,31 +56,35 @@ ranger --copy-config=all
 sed -i 's/show_hidden false/show_hidden true/' ~/.config/ranger/rc.conf
 
 # Neovim setup
-# make a home for init.vim
+# make a folder for init.vim, which contains plugins' info and radian setup
 mkdir -p .config/nvim/
 wget -O .config/nvim/init.vim https://raw.githubusercontent.com/asieminski/ubuntu-installation-script/main/init.vim
-# vim-plug
+# install vim-plug plugin manager
 sh -c 'curl -fLo "${XDG_DATA_HOME:-$HOME/.local/share}"/nvim/site/autoload/plug.vim --create-dirs \
        https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
-# Install nodejs for coc autocompletion plugin
+# Install nodejs for autocompletion plugin (coc)
 curl -sL install-node.vercel.app/lts | bash -s -- -y
-
-# neovim utilities install
+# other neovim dependencies
 pip3 jedi pynvim radian
 sudo R -e "install.packages('languageserver')"
+# Add radian folder to path
+echo "PATH=~/.local/bin/:$PATH" >> .bashrc
+# Make radian the default r interpreter
+echo "alias r=\"radian\"" >> .bashrc
+
 # Install cmdstan
 sudo miniconda/bin/conda install -c conda-forge cmdstan -y
 
-# Change bashrc setup
-echo "alias r=\"radian\"" >> .bashrc
+# Print system info when new terminal is opened
 echo "neofetch" >> .bashrc
-echo "PATH=~/.local/bin/:$PATH" >> .bashrc
+
 # Fix bluetooth kernel driver bug https://askubuntu.com/questions/1403817/i-cant-turn-on-bluetooth-in-ubuntu-22-04-lts
 # From http://mirrors.edge.kernel.org/ubuntu/pool/main/l/linux-firmware/
 wget http://archive.ubuntu.com/ubuntu/pool/main/l/linux-firmware/linux-firmware_1.201.tar.xz
 tar -xf linux-firmware_1.201.tar.xz
 sudo cp -R linux-firmware/ar3k /lib/firmware
 
+# FINAL STEPS:
 # nvim into dotfiles/nvim/.config/nvim and run 
 # :PlugInstall
 # Install coc (autcompletion extensions https://github.com/neoclide/coc.nvim/wiki/Using-coc-extensions)
